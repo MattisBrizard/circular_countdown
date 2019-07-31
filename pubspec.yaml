@@ -1,5 +1,5 @@
 name: circular_countdown
-description: A circular countdown.
+description: An implementation of a circular countdown.
 version: 0.0.1
 author: Mattis Brizard
 homepage:

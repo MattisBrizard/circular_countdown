@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
-/// Painter that draws the circular countdown
+/// Painter that draws the circular countdown.
+///
+/// Will repaint only if his parameters has changed.
 class CircularCountdownPainter extends CustomPainter {
   CircularCountdownPainter({
     @required this.countdownTotal,
@@ -21,32 +23,47 @@ class CircularCountdownPainter extends CustomPainter {
   final Color countdownRemainingColor;
   final Color countdownCurrentColor;
   final double gapFactor;
-  double strokeWidth;
+  final double strokeWidth;
 
   @override
   void paint(Canvas canvas, Size size) {
-    if (strokeWidth == null) {
-      strokeWidth = size.width / 8;
-    }
-
     final Paint remainingPaint = Paint()
       ..style = PaintingStyle.stroke
       ..strokeWidth = strokeWidth
       ..color = countdownRemainingColor;
+
     final Paint totalPaint = Paint()
       ..style = PaintingStyle.stroke
       ..strokeWidth = strokeWidth
       ..color = countdownTotalColor;
+
+    Paint currentPaint;
+    if (countdownCurrentColor != null) {
+      currentPaint = Paint()
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = strokeWidth
+        ..color = countdownCurrentColor;
+    }
 
     final double emptyArcSize = 2 * math.pi / (gapFactor * countdownTotal);
     final double fullArcSize = 2 * math.pi / countdownTotal - emptyArcSize;
 
     ui.Paint paint;
     for (int unit = 0; unit < countdownTotal; unit++) {
-      if (countdownTotal - unit < countdownRemaining) {
-        paint = remainingPaint;
+      if (currentPaint != null) {
+        if (countdownTotal - unit < countdownRemaining) {
+          paint = remainingPaint;
+        } else if (countdownTotal - unit == countdownRemaining) {
+          paint = currentPaint;
+        } else {
+          paint = totalPaint;
+        }
       } else {
-        paint = totalPaint;
+        if (countdownTotal - unit <= countdownRemaining) {
+          paint = remainingPaint;
+        } else {
+          paint = totalPaint;
+        }
       }
 
       final double startAngle =
@@ -55,7 +72,7 @@ class CircularCountdownPainter extends CustomPainter {
       canvas.drawArc(
         Rect.fromCircle(
           center: Offset(size.width / 2, size.height / 2),
-          radius: (size.width / 2) - 10,
+          radius: (size.width / 2),
         ),
         startAngle,
         fullArcSize,
@@ -63,39 +80,16 @@ class CircularCountdownPainter extends CustomPainter {
         paint,
       );
     }
-    // final double fontSize = size.width / 2.5;
-    // final textSpan = TextSpan(
-    //     text: daysRemaining.toString(),
-    //     style: TextStyle(
-    //       color: GamificationColors.white,
-    //       fontSize: fontSize,
-    //       fontFamily: 'Impact',
-    //     ));
-    // final textPainter = TextPainter(
-    //   text: textSpan,
-    //   textDirection: TextDirection.ltr,
-    // )..layout(
-    //     minWidth: 0,
-    //     maxWidth: size.width,
-    //   );
-    // final constraints = BoxConstraints(
-    //   maxWidth: size.width / 2,
-    //   minWidth: 0,
-    // );
-    // final RenderParagraph renderParagraph = RenderParagraph(
-    //   textSpan,
-    //   textDirection: ui.TextDirection.ltr,
-    //   maxLines: 1,
-    // )..layout(constraints);
-    // final double textwidth =
-    //     renderParagraph.getMinIntrinsicWidth(70).ceilToDouble();
-    // final double textheight =
-    //     renderParagraph.getMinIntrinsicHeight(70).ceilToDouble();
-    // final offset = Offset(
-    //     size.width / 2 - textwidth / 2, size.height / 2 - textheight / 2);
-    // textPainter.paint(canvas, offset);
   }
 
   @override
-  bool shouldRepaint(CircularCountdownPainter oldDelegate) => false;
+  bool shouldRepaint(CircularCountdownPainter oldDelegate) {
+    return (countdownTotal != oldDelegate.countdownTotal ||
+        countdownRemaining != oldDelegate.countdownRemaining ||
+        countdownTotalColor != oldDelegate.countdownTotalColor ||
+        countdownRemainingColor != oldDelegate.countdownRemainingColor ||
+        countdownCurrentColor != oldDelegate.countdownCurrentColor ||
+        gapFactor != oldDelegate.gapFactor ||
+        strokeWidth != oldDelegate.strokeWidth);
+  }
 }

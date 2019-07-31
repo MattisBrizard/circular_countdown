@@ -9,6 +9,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Circular Countdown',
       home: MyHomePage(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
@@ -17,19 +18,24 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('CircularCountdown'),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+      ),
       backgroundColor: Colors.grey[900],
       body: Center(
-        child: CircularCountdown(
-          size: Size(
-            300,
-            300,
-          ),
-          countdownTotal: 10,
-          countdownRemaining: 4,
-          countdownTotalColor: Colors.white.withOpacity(0.5),
-          countdownRemainingColor: Colors.red,
-          strokeWidth: 50,
-          gapFactor: 10,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            CircularCountdown(
+              diameter: 250,
+              countdownTotal: 10,
+              countdownRemaining: 7,
+              countdownCurrentColor: Colors.red,
+              strokeWidth: 0,
+            ),
+          ],
         ),
       ),
     );
