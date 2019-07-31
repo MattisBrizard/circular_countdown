@@ -32,8 +32,6 @@ class MyHomePage extends StatelessWidget {
               diameter: 250,
               countdownTotal: 10,
               countdownRemaining: 7,
-              countdownCurrentColor: Colors.red,
-              strokeWidth: 0,
             ),
           ],
         ),
