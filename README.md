@@ -37,7 +37,7 @@ CircularCountdown(
 
 <img width="535" height="950" src="https://raw.githubusercontent.com/MattisBrizard/circular_countdown/master/doc/images/static.png">
 
-By plaYing with the parameters, you can change the size, the colors, the size of the gaps and the strokeWidth.
+By playing with the parameters, you can change the size, the colors, the size of the gaps and the strokeWidth.
 
 <img width="535" height="950" src="https://raw.githubusercontent.com/MattisBrizard/circular_countdown/master/doc/images/complex.png">
 
