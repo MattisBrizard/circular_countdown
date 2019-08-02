@@ -35,19 +35,10 @@ CircularCountdown(
 ...
 ```
 
-![Overview](https://raw.githubusercontent.com/MattisBrizard/circular_countdown/master/doc/images/static.png)
+![Overview](https://raw.githubusercontent.com/MattisBrizard/circular_countdown/master/doc/images/static.png =535x950)
 
 By changing with the parameters, you can change the size, the colors, the size of the gaps and the strokeWidth.
-
-![Overview](https://raw.githubusercontent.com/MattisBrizard/circular_countdown/master/doc/images/complex.png)
+![Overview](https://raw.githubusercontent.com/MattisBrizard/circular_countdown/master/doc/images/complex.png =535x950)
 
 Starting from this you can create animated countdown (see how in example).
-
 ![Overview](https://raw.githubusercontent.com/MattisBrizard/circular_countdown/master/doc/images/animated_countdown.gif)
-
-## Contributions
-
-Feel free to contribute to this project.
-
-If you find a bug or want a feature, but don't know how to fix/implement it, please fill an [issue](https://github.com/letsar/flutter_sidekick/issues).  
-If you fixed a bug or implemented a new feature, please send a [pull request](https://github.com/letsar/flutter_sidekick/pulls).
