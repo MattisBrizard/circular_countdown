@@ -1,16 +1,53 @@
 # circular_countdown
 
-A new Flutter package project.
+A implementation of a circular countdown.
 
 ## Getting Started
 
-This project is a starting point for a Dart
-[package](https://flutter.dev/developing-packages/),
-a library module containing code that can be shared easily across
-multiple Flutter or Dart projects.
+In the `pubspec.yaml` of your flutter project, add the following dependency:
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+```yaml
+dependencies:
+  ...
+  circular_countdown: ^0.0.1
+```
+
+In your library add the following import:
+
+```dart
+import  'package:circular_countdown/circular_countdown.dart';
+```
+
+For help getting started with Flutter, view the online [documentation](https://flutter.io/).
+
+## Example
+
+This is the way to create a simple static countdown.
+
+```dart
+import 'package:flutter/material.dart';
+...
+CircularCountdown(
+	diameter:  250,
+	countdownTotal:  10,
+	countdownRemaining:  7,
+)
+...
+```
+
+![Overview](https://raw.githubusercontent.com/MattisBrizard/circular_countdown/master/doc/images/static.png)
+
+By changing with the parameters, you can change the size, the colors, the size of the gaps and the strokeWidth.
+
+![Overview](https://raw.githubusercontent.com/MattisBrizard/circular_countdown/master/doc/images/complex.png)
+
+Starting from this you can create animated countdown (see how in example).
 
 ![Overview](https://raw.githubusercontent.com/MattisBrizard/circular_countdown/master/doc/images/animated_countdown.gif)
+
+## Contributions
+
+Feel free to contribute to this project.
+
+If you find a bug or want a feature, but don't know how to fix/implement it, please fill an [issue](https://github.com/letsar/flutter_sidekick/issues).  
+If you fixed a bug or implemented a new feature, please send a [pull request](https://github.com/letsar/flutter_sidekick/pulls).
