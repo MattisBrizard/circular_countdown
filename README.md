@@ -1,6 +1,6 @@
 # circular_countdown
 
-A implementation of a circular countdown.
+An implementation of a circular countdown.
 
 ## Getting Started
 
