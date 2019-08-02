@@ -63,7 +63,7 @@ class CircularCountdown extends StatelessWidget {
   /// Defaults to [Colors.white].
   final Color countdownRemainingColor;
 
-  /// The color to use when painting passed units.
+  /// The color to use when painting the current unit.
   final Color countdownCurrentColor;
 
   /// The part of the circle that will be gap. (`1/gapFactor`)
@@ -88,13 +88,14 @@ class CircularCountdown extends StatelessWidget {
             : diameter / 6;
     return CustomPaint(
       painter: CircularCountdownPainter(
-          countdownTotal: countdownTotal,
-          countdownRemaining: countdownRemaining,
-          countdownTotalColor: countdownTotalColor,
-          countdownRemainingColor: countdownRemainingColor,
-          countdownCurrentColor: countdownCurrentColor,
-          gapFactor: gapFactor,
-          strokeWidth: paintStrokeWidth),
+        countdownTotal: countdownTotal,
+        countdownRemaining: countdownRemaining,
+        countdownTotalColor: countdownTotalColor,
+        countdownRemainingColor: countdownRemainingColor,
+        countdownCurrentColor: countdownCurrentColor,
+        gapFactor: gapFactor,
+        strokeWidth: paintStrokeWidth,
+      ),
       size: Size(diameter - paintStrokeWidth, diameter - paintStrokeWidth),
     );
   }

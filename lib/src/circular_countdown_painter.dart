@@ -11,11 +11,11 @@ class CircularCountdownPainter extends CustomPainter {
   CircularCountdownPainter({
     @required this.countdownTotal,
     @required this.countdownRemaining,
-    this.countdownTotalColor,
-    this.countdownRemainingColor,
+    @required this.countdownTotalColor,
+    @required this.countdownRemainingColor,
+    @required this.strokeWidth,
+    @required this.gapFactor,
     this.countdownCurrentColor,
-    this.strokeWidth,
-    this.gapFactor,
   });
   final int countdownTotal;
   final int countdownRemaining;
@@ -25,29 +25,34 @@ class CircularCountdownPainter extends CustomPainter {
   final double gapFactor;
   final double strokeWidth;
 
-  @override
-  void paint(Canvas canvas, Size size) {
-    final Paint remainingPaint = Paint()
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = strokeWidth
-      ..color = countdownRemainingColor;
+  Paint get totalPaint => Paint()
+    ..style = PaintingStyle.stroke
+    ..strokeWidth = strokeWidth
+    ..color = countdownTotalColor;
 
-    final Paint totalPaint = Paint()
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = strokeWidth
-      ..color = countdownTotalColor;
+  Paint get remainingPaint => Paint()
+    ..style = PaintingStyle.stroke
+    ..strokeWidth = strokeWidth
+    ..color = countdownRemainingColor;
 
-    Paint currentPaint;
+  Paint get currentPaint {
     if (countdownCurrentColor != null) {
-      currentPaint = Paint()
+      return Paint()
         ..style = PaintingStyle.stroke
         ..strokeWidth = strokeWidth
         ..color = countdownCurrentColor;
+    } else {
+      return null;
     }
+  }
 
-    final double emptyArcSize = 2 * math.pi / (gapFactor * countdownTotal);
-    final double fullArcSize = 2 * math.pi / countdownTotal - emptyArcSize;
+  double get emptyArcSize => 2 * math.pi / (gapFactor * countdownTotal);
+  double get fullArcSize => 2 * math.pi / countdownTotal - emptyArcSize;
+  double startAngle(unit) =>
+      -math.pi / 2 + unit * (emptyArcSize + fullArcSize) + emptyArcSize / 2;
 
+  @override
+  void paint(Canvas canvas, Size size) {
     ui.Paint paint;
     for (int unit = 0; unit < countdownTotal; unit++) {
       if (currentPaint != null) {
@@ -65,16 +70,12 @@ class CircularCountdownPainter extends CustomPainter {
           paint = totalPaint;
         }
       }
-
-      final double startAngle =
-          -math.pi / 2 + unit * (emptyArcSize + fullArcSize) + emptyArcSize / 2;
-
       canvas.drawArc(
         Rect.fromCircle(
           center: Offset(size.width / 2, size.height / 2),
           radius: (size.width / 2),
         ),
-        startAngle,
+        startAngle(unit),
         fullArcSize,
         false,
         paint,
