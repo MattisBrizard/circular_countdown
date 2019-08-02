@@ -9,7 +9,7 @@ In the `pubspec.yaml` of your flutter project, add the following dependency:
 ```yaml
 dependencies:
   ...
-  circular_countdown: ^0.0.1
+  circular_countdown: ^latest_version
 ```
 
 In your library add the following import:
