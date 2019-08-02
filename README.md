@@ -35,10 +35,10 @@ CircularCountdown(
 ...
 ```
 
-![Overview](https://raw.githubusercontent.com/MattisBrizard/circular_countdown/master/doc/images/static.png =535x950)
+<img width="535" height="950" src="https://raw.githubusercontent.com/MattisBrizard/circular_countdown/master/doc/images/static.png">
 
 By changing with the parameters, you can change the size, the colors, the size of the gaps and the strokeWidth.
-![Overview](https://raw.githubusercontent.com/MattisBrizard/circular_countdown/master/doc/images/complex.png =535x950)
+<img width="535" height="950" src="https://raw.githubusercontent.com/MattisBrizard/circular_countdown/master/doc/images/complex.png">
 
 Starting from this you can create animated countdown (see how in example).
 ![Overview](https://raw.githubusercontent.com/MattisBrizard/circular_countdown/master/doc/images/animated_countdown.gif)
