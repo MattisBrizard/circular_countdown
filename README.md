@@ -37,8 +37,15 @@ CircularCountdown(
 
 <img width="535" height="950" src="https://raw.githubusercontent.com/MattisBrizard/circular_countdown/master/doc/images/static.png">
 
-By changing with the parameters, you can change the size, the colors, the size of the gaps and the strokeWidth.
+By plaing with the parameters, you can change the size, the colors, the size of the gaps and the strokeWidth.
 <img width="535" height="950" src="https://raw.githubusercontent.com/MattisBrizard/circular_countdown/master/doc/images/complex.png">
 
 Starting from this you can create animated countdown (see how in example).
 ![Overview](https://raw.githubusercontent.com/MattisBrizard/circular_countdown/master/doc/images/animated_countdown.gif)
+
+## Contributions
+
+Feel free to contribute to this project.
+
+If you find a bug or want a feature, but don't know how to fix/implement it, please fill an [issue](https://github.com/MattisBrizard/circular_countdown/issues).  
+If you fixed a bug or implemented a new feature, please send a [pull request](https://github.com/MattisBrizard/circular_countdown/pulls).
