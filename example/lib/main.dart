@@ -1,7 +1,6 @@
 import 'package:example/animated_countdown.dart';
 import 'package:example/static_countdown.dart';
 import 'package:flutter/material.dart';
-import 'package:circular_countdown/circular_countdown.dart';
 
 void main() => runApp(MyApp());
 
@@ -21,7 +20,7 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('CircularCountdown Example'),
+        title: const Text('CircularCountdown Example'),
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
@@ -31,7 +30,7 @@ class MyHomePage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             RaisedButton(
-              child: Text('Static CircularCountdown'),
+              child: const Text('Static CircularCountdown'),
               onPressed: () => Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) => StaticCountdownPage(),
@@ -39,7 +38,7 @@ class MyHomePage extends StatelessWidget {
               ),
             ),
             RaisedButton(
-              child: Text('Animated CircularCountdown'),
+              child: const Text('Animated CircularCountdown'),
               onPressed: () => Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) => AnimatedCountdownPage(),

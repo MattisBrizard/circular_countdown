@@ -1,8 +1,8 @@
 name: circular_countdown
 description: An implementation of a circular countdown.
 version: 0.0.1
-author: Mattis Brizard
-homepage:
+author: Mattis Brizard <mattisbrizard@gmail.com>
+homepage: https://github.com/MattisBrizard/circular_countdown
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
