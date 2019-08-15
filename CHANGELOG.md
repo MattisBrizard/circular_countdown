@@ -1,6 +1,7 @@
 ## [0.1.0] - 15/08/2019
 
 Added possibility to display a textSpan in the center of the widget.
+
 This textSpan will displays only if there is enough space.
 
 ```dart
