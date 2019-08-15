@@ -8,7 +8,7 @@ class AnimatedCountdownPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Animated CircularCountdown'),
+        title: const Text('Animated CircularCountdown'),
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
@@ -16,7 +16,7 @@ class AnimatedCountdownPage extends StatelessWidget {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
+          children: const <Widget>[
             _AnimatedCountdown(strokeWidth: 125),
             _AnimatedCountdown(strokeWidth: 40),
           ],
@@ -35,7 +35,7 @@ class _AnimatedCountdown extends StatefulWidget {
 }
 
 class _AnimatedCountdownState extends State<_AnimatedCountdown> {
-  final totalSeconds = 30;
+  final int totalSeconds = 30;
   int seconds;
   Timer timer;
 
@@ -66,6 +66,13 @@ class _AnimatedCountdownState extends State<_AnimatedCountdown> {
       countdownCurrentColor: Colors.orange,
       gapFactor: 4,
       strokeWidth: widget.strokeWidth,
+      textSpan: TextSpan(
+        text: seconds.toString(),
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: 90,
+        ),
+      ),
     );
   }
 }

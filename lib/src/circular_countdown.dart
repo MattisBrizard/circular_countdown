@@ -36,6 +36,7 @@ class CircularCountdown extends StatelessWidget {
     this.countdownCurrentColor,
     this.gapFactor = 6,
     this.strokeWidth,
+    this.textSpan,
   })  : assert(diameter != null && diameter > 0.0),
         assert(countdownTotal != null && countdownTotal > 0.0),
         assert(countdownRemaining != null &&
@@ -80,9 +81,14 @@ class CircularCountdown extends StatelessWidget {
   /// Default to [diameter/6] for proportion purpose.
   final double strokeWidth;
 
+  /// The TextSpan to display in the center of the widget.
+  ///
+  /// Warning : It will not displays if the textSpan is too large.
+  final TextSpan textSpan;
+
   @override
   Widget build(BuildContext context) {
-    double paintStrokeWidth =
+    final double paintStrokeWidth =
         (strokeWidth != null && strokeWidth > 0 && strokeWidth <= diameter / 2)
             ? strokeWidth
             : diameter / 6;
@@ -95,6 +101,7 @@ class CircularCountdown extends StatelessWidget {
         countdownCurrentColor: countdownCurrentColor,
         gapFactor: gapFactor,
         strokeWidth: paintStrokeWidth,
+        textSpan: textSpan,
       ),
       size: Size(diameter - paintStrokeWidth, diameter - paintStrokeWidth),
     );

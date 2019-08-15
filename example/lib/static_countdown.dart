@@ -6,7 +6,7 @@ class StaticCountdownPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Static CircularCountdown'),
+        title: const Text('Static CircularCountdown'),
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
@@ -19,6 +19,14 @@ class StaticCountdownPage extends StatelessWidget {
               diameter: 250,
               countdownTotal: 10,
               countdownRemaining: 7,
+              strokeWidth: 45,
+              textSpan: TextSpan(
+                text: '7',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 90,
+                ),
+              ),
             ),
           ],
         ),
