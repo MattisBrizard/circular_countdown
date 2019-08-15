@@ -1,8 +1,10 @@
 # circular_countdown
 
-An implementation of a circular countdown.
+A package that represents a circular countdown that you can use for every kind of units (days, hours, seconds, points, ...) that could be decremented.
 
 ## Getting Started
+
+The latest version is [![Pub](https://img.shields.io/pub/v/circular_countdown.svg)](https://pub.dev/packages/circular_countdown).
 
 In the `pubspec.yaml` of your flutter project, add the following dependency:
 
