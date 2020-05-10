@@ -1,6 +1,6 @@
 # [1.0.0] - 10/05/2020
 
-## Added
+## Added :
 
 Added a `TimeCircularCountdown` which provides an easy way to setup a time countdown with the `CircularCountdown`.
 
@@ -15,7 +15,7 @@ TimeCircularCountdown(
         color: Colors.white,
         fontSize: 90,
     ),
-),
+);
 ```
 
 ## Breaking changes :
