@@ -1,18 +1,21 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
-import 'circular_countdown_painter.dart';
+import 'painter.dart';
 
 /// A circular countdown.
 ///
-/// Can be used to represent all kind of units (days, hours, points, ...) that could be decremented
+/// Can be used to represent all kind of units (days, hours, points, ...)
+/// that could be decremented.
 class CircularCountdown extends StatelessWidget {
-  /// Creates a Circular Countdown.
+  /// Creates a [CircularCountdown].
   ///
-  /// * [diameter] determines the size of the widget.
   /// * [countdownTotal] is the total amount of units.
-  /// * [countdownRemaining] is the amount of remaining units.
   ///
-  /// You can override some of the colors with the [countdownTotalColor] and
+  /// By default it will take the available space.
+  ///
+  /// You can override the colors with the [countdownTotalColor] and
   /// [countdownRemainingColor] properties.
   /// A color for the current unit can be set with the [countdownCurrentColor].
   ///
@@ -20,38 +23,40 @@ class CircularCountdown extends StatelessWidget {
   ///
   /// ```dart
   /// CircularCountdown(
-  ///   diameter: 250,
   ///   countdownTotal: 10,
-  ///   countdownRemaining: 3,
-  /// ),
+  /// );
   /// ```
   /// {@end-tool}
   const CircularCountdown({
     Key key,
-    @required this.diameter,
     @required this.countdownTotal,
-    @required this.countdownRemaining,
-    this.countdownTotalColor = Colors.white30,
-    this.countdownRemainingColor = Colors.white,
+    this.countdownRemaining,
+    this.diameter,
+    this.countdownTotalColor,
+    this.countdownRemainingColor,
     this.countdownCurrentColor,
-    this.gapFactor = 6,
+    this.gapFactor,
     this.strokeWidth,
-    this.textSpan,
-  })  : assert(diameter != null && diameter > 0.0),
+    this.textStyle,
+  })  : assert(diameter == null || diameter > 0.0),
         assert(countdownTotal != null && countdownTotal > 0.0),
-        assert(countdownRemaining != null &&
-            countdownRemaining >= 0.0 &&
-            countdownRemaining <= countdownTotal),
-        assert(gapFactor > 0.0),
+        assert(countdownRemaining == null ||
+            (countdownRemaining >= 0.0 &&
+                countdownRemaining <= countdownTotal)),
+        assert(gapFactor == null || gapFactor > 0.0),
         super(key: key);
 
   /// The outer diameter of the circular countdown widget.
+  ///
+  /// Default to max available if possible, else `100`.
   final double diameter;
 
   /// The total amount of units.
   final int countdownTotal;
 
   /// The amount of remaining units.
+  ///
+  /// Default to `countdownTotal`.
   final int countdownRemaining;
 
   /// The color to use when painting passed units.
@@ -81,29 +86,57 @@ class CircularCountdown extends StatelessWidget {
   /// Default to [diameter/6] for proportion purpose.
   final double strokeWidth;
 
-  /// The TextSpan to display in the center of the widget.
+  /// The TextStyle to use to display to display
+  /// remaining in the center of the widget.
   ///
-  /// Warning : It will not displays if the textSpan is too large.
-  final TextSpan textSpan;
+  /// Warning : It will not displays if the `fontSize` is too large.
+  final TextStyle textStyle;
+
+  static const double _fallbackDiameter = 100;
 
   @override
   Widget build(BuildContext context) {
-    final double paintStrokeWidth =
-        (strokeWidth != null && strokeWidth > 0 && strokeWidth <= diameter / 2)
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        double computedDiameter;
+        if (diameter == null) {
+          final double height = constraints.maxHeight != double.infinity
+              ? constraints.maxHeight
+              : _fallbackDiameter;
+
+          final double width = constraints.maxWidth != double.infinity
+              ? constraints.maxWidth
+              : _fallbackDiameter;
+
+          computedDiameter = min(height, width);
+        }
+
+        final finalDiameter = diameter ?? computedDiameter;
+        final double paintStrokeWidth = (strokeWidth != null &&
+                strokeWidth > 0 &&
+                strokeWidth <= finalDiameter / 2)
             ? strokeWidth
-            : diameter / 6;
-    return CustomPaint(
-      painter: CircularCountdownPainter(
-        countdownTotal: countdownTotal,
-        countdownRemaining: countdownRemaining,
-        countdownTotalColor: countdownTotalColor,
-        countdownRemainingColor: countdownRemainingColor,
-        countdownCurrentColor: countdownCurrentColor,
-        gapFactor: gapFactor,
-        strokeWidth: paintStrokeWidth,
-        textSpan: textSpan,
-      ),
-      size: Size(diameter - paintStrokeWidth, diameter - paintStrokeWidth),
+            : finalDiameter / 6;
+
+        return Center(
+          child: CustomPaint(
+            painter: CircularCountdownPainter(
+              countdownTotal: countdownTotal,
+              countdownRemaining: countdownRemaining ?? countdownTotal,
+              countdownTotalColor: countdownTotalColor ?? Colors.white30,
+              countdownRemainingColor: countdownRemainingColor ?? Colors.white,
+              countdownCurrentColor: countdownCurrentColor,
+              gapFactor: gapFactor ?? 6,
+              strokeWidth: paintStrokeWidth,
+              textStyle: textStyle,
+            ),
+            size: Size(
+              finalDiameter,
+              finalDiameter,
+            ),
+          ),
+        );
+      },
     );
   }
 }

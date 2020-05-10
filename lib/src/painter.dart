@@ -5,10 +5,9 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
 /// Painter that draws the circular countdown.
-///
-/// Will repaint only if his parameters has changed.
 class CircularCountdownPainter extends CustomPainter {
-  CircularCountdownPainter({
+  /// Creates a [CircularCountdownPainter].
+  const CircularCountdownPainter({
     @required this.countdownTotal,
     @required this.countdownRemaining,
     @required this.countdownTotalColor,
@@ -16,7 +15,7 @@ class CircularCountdownPainter extends CustomPainter {
     @required this.strokeWidth,
     @required this.gapFactor,
     this.countdownCurrentColor,
-    this.textSpan,
+    this.textStyle,
   });
 
   final int countdownTotal;
@@ -26,19 +25,19 @@ class CircularCountdownPainter extends CustomPainter {
   final double gapFactor;
   final double strokeWidth;
   final Color countdownCurrentColor;
-  final TextSpan textSpan;
+  final TextStyle textStyle;
 
-  Paint get totalPaint => Paint()
+  Paint get _totalPaint => Paint()
     ..style = PaintingStyle.stroke
     ..strokeWidth = strokeWidth
     ..color = countdownTotalColor;
 
-  Paint get remainingPaint => Paint()
+  Paint get _remainingPaint => Paint()
     ..style = PaintingStyle.stroke
     ..strokeWidth = strokeWidth
     ..color = countdownRemainingColor;
 
-  Paint get currentPaint {
+  Paint get _currentPaint {
     if (countdownCurrentColor != null) {
       return Paint()
         ..style = PaintingStyle.stroke
@@ -49,64 +48,70 @@ class CircularCountdownPainter extends CustomPainter {
     }
   }
 
-  double get emptyArcSize => 2 * math.pi / (gapFactor * countdownTotal);
-  double get fullArcSize => 2 * math.pi / countdownTotal - emptyArcSize;
-  double startAngle(int unit) =>
-      -math.pi / 2 + unit * (emptyArcSize + fullArcSize) + emptyArcSize / 2;
-  double getInnerRadius(double width) {
-    final double _radius = width - 2 * strokeWidth;
-    return (_radius > 0) ? _radius : 0;
-  }
+  double get _emptyArcSize => 2 * math.pi / (gapFactor * countdownTotal);
+  double get _fullArcSize => 2 * math.pi / countdownTotal - _emptyArcSize;
+  double _startAngle(int unit) =>
+      -math.pi / 2 + unit * (_emptyArcSize + _fullArcSize) + _emptyArcSize / 2;
+
+  double _getInnerDiameter(double width) =>
+      math.max(0, width - 2 * strokeWidth);
+  double _getRadius(double width) => math.max(0, width / 2 - strokeWidth / 2);
 
   @override
   void paint(Canvas canvas, Size size) {
     ui.Paint paint;
     for (int unit = 0; unit < countdownTotal; unit++) {
-      if (currentPaint != null) {
+      // Set painter.
+      if (_currentPaint != null) {
         if (countdownTotal - unit < countdownRemaining) {
-          paint = remainingPaint;
+          paint = _remainingPaint;
         } else if (countdownTotal - unit == countdownRemaining) {
-          paint = currentPaint;
+          paint = _currentPaint;
         } else {
-          paint = totalPaint;
+          paint = _totalPaint;
         }
       } else {
         if (countdownTotal - unit <= countdownRemaining) {
-          paint = remainingPaint;
+          paint = _remainingPaint;
         } else {
-          paint = totalPaint;
+          paint = _totalPaint;
         }
       }
+
       canvas.drawArc(
         Rect.fromCircle(
           center: Offset(size.width / 2, size.height / 2),
-          radius: size.width / 2,
+          radius: _getRadius(size.width),
         ),
-        startAngle(unit),
-        fullArcSize,
+        _startAngle(unit),
+        _fullArcSize,
         false,
         paint,
       );
     }
 
-    // Draws the textSpan (if exists) in the middle of the widget if there is enough space
-    if (textSpan != null) {
-      final TextPainter textPainter = TextPainter(
-        text: textSpan,
+    // Draws the current value in the middle of the widget
+    // if there is enough space.
+    if (textStyle != null) {
+      final _innerDiameter = _getInnerDiameter(size.width);
+      final text = TextSpan(
+        text: countdownRemaining.toString(),
+        style: textStyle,
+      );
+      final textPainter = TextPainter(
+        text: text,
         textDirection: TextDirection.ltr,
         maxLines: 1,
       )..layout(
-          minWidth: getInnerRadius(size.width),
-          maxWidth: getInnerRadius(size.width),
+          minWidth: _innerDiameter,
+          maxWidth: _innerDiameter,
         );
       final BoxConstraints constraints = BoxConstraints(
-        maxWidth: getInnerRadius(size.width),
-        minWidth: 0,
-        maxHeight: getInnerRadius(size.width),
-        minHeight: 0,
+        maxWidth: _innerDiameter,
+        maxHeight: _innerDiameter,
       );
       final RenderParagraph renderParagraph = RenderParagraph(
-        textSpan,
+        text,
         textDirection: TextDirection.ltr,
         overflow: TextOverflow.ellipsis,
         maxLines: 1,
@@ -116,7 +121,7 @@ class CircularCountdownPainter extends CustomPainter {
           renderParagraph.getMinIntrinsicWidth(size.width / 2).ceilToDouble();
       final double textHeight =
           renderParagraph.getMinIntrinsicHeight(size.width / 2).ceilToDouble();
-      if (textWidth <= getInnerRadius(size.width)) {
+      if (textWidth <= _innerDiameter) {
         final Offset offset = Offset(
           size.width / 2 - textWidth / 2,
           size.height / 2 - textHeight / 2,
@@ -135,6 +140,6 @@ class CircularCountdownPainter extends CustomPainter {
         countdownCurrentColor != oldDelegate.countdownCurrentColor ||
         gapFactor != oldDelegate.gapFactor ||
         strokeWidth != oldDelegate.strokeWidth ||
-        textSpan != oldDelegate.textSpan;
+        textStyle != oldDelegate.textStyle;
   }
 }
