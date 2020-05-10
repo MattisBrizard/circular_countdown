@@ -1,6 +1,7 @@
-import 'package:example/animated_countdown.dart';
-import 'package:example/static_countdown.dart';
 import 'package:flutter/material.dart';
+
+import 'countdowns/static_countdown.dart';
+import 'countdowns/time_countdown.dart';
 
 void main() => runApp(MyApp());
 
@@ -30,21 +31,21 @@ class MyHomePage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             RaisedButton(
-              child: const Text('Static CircularCountdown'),
               onPressed: () => Navigator.of(context).push(
-                MaterialPageRoute(
+                MaterialPageRoute<StaticCountdownPage>(
                   builder: (context) => StaticCountdownPage(),
                 ),
               ),
+              child: const Text('Static CircularCountdown'),
             ),
             RaisedButton(
-              child: const Text('Animated CircularCountdown'),
               onPressed: () => Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => AnimatedCountdownPage(),
+                MaterialPageRoute<TimeCountdownPage>(
+                  builder: (context) => TimeCountdownPage(),
                 ),
               ),
-            )
+              child: const Text('Time CircularCountdown'),
+            ),
           ],
         ),
       ),
