@@ -44,6 +44,6 @@ By playing with the parameters, you can change the size, the colors, the size of
 
 ## Demo
 
-A web demo is available here : https://mattisbrizard.github.io/countdown_clock/#/
+A web demo is available here : https://mattisbrizard.github.io/circular_countdown/#/
 
 [![Build Status](https://img.shields.io/github/workflow/status/MattisBrizard/circular_countdown/Deploy%20Flutter%20web)](https://github.com/MattisBrizard/circular_countdown/actions?query=workflow%3A%22Deploy+Flutter+web%22)
