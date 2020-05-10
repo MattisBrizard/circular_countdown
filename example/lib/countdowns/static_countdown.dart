@@ -11,21 +11,19 @@ class StaticCountdownPage extends StatelessWidget {
         elevation: 0,
       ),
       backgroundColor: Colors.grey[900],
+  
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
+          children: const <Widget>[
             CircularCountdown(
               diameter: 250,
               countdownTotal: 10,
               countdownRemaining: 7,
-              strokeWidth: 45,
-              textSpan: TextSpan(
-                text: '7',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 90,
-                ),
+              strokeWidth: 50,
+              textStyle: TextStyle(
+                color: Colors.white,
+                fontSize: 90,
               ),
             ),
           ],
