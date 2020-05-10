@@ -30,25 +30,20 @@ This is the way to create a simple static countdown.
 import 'package:flutter/material.dart';
 ...
 CircularCountdown(
-	diameter:  250,
 	countdownTotal:  10,
 	countdownRemaining:  7,
 )
 ...
 ```
 
-<img width="535" height="950" src="https://raw.githubusercontent.com/MattisBrizard/circular_countdown/master/doc/images/static.png">
+<img width="250"  src="https://raw.githubusercontent.com/MattisBrizard/circular_countdown/master/doc/images/static.png">
 
 By playing with the parameters, you can change the size, the colors, the size of the gaps and the strokeWidth.
 
-<img width="535" height="950" src="https://raw.githubusercontent.com/MattisBrizard/circular_countdown/master/doc/images/complex.png">
+<img width="250"  src="https://raw.githubusercontent.com/MattisBrizard/circular_countdown/master/doc/images/complex.png">
 
-Starting from this you can create animated countdown (see how in example).
-![Overview](https://raw.githubusercontent.com/MattisBrizard/circular_countdown/master/doc/images/animated_countdown.gif)
+## Demo
 
-## Contributions
+A web demo is available here : https://mattisbrizard.github.io/countdown_clock/#/
 
-Feel free to contribute to this project.
-
-If you find a bug or want a feature, but don't know how to fix/implement it, please fill an [issue](https://github.com/MattisBrizard/circular_countdown/issues).  
-If you fixed a bug or implemented a new feature, please send a [pull request](https://github.com/MattisBrizard/circular_countdown/pulls).
+[![Build Status](https://img.shields.io/github/workflow/status/MattisBrizard/circular_countdown/Deploy%20Flutter%20web)](https://github.com/MattisBrizard/circular_countdown/actions?query=workflow%3A%22Deploy+Flutter+web%22)
