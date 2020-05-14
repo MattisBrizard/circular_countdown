@@ -1,3 +1,9 @@
+# [1.0.1] - 14/05/2020
+
+## Changes :
+
+- Updated Documentation.
+
 # [1.0.0] - 10/05/2020
 
 ## Added :
