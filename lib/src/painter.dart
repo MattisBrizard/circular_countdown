@@ -18,13 +18,33 @@ class CircularCountdownPainter extends CustomPainter {
     this.textStyle,
   });
 
+  /// The total amount of units.
   final int countdownTotal;
+
+  /// The amount of remaining units.
   final int countdownRemaining;
+
+  /// The color to use when painting passed units.
   final Color countdownTotalColor;
+
+  /// The color to use when painting remaining units.
   final Color countdownRemainingColor;
-  final double gapFactor;
-  final double strokeWidth;
+
+  /// The color to use when painting the current unit.
   final Color countdownCurrentColor;
+
+  /// The part of the circle that will be gap. (`1/gapFactor`)
+  ///
+  /// Example : `gapFactor: 2` means that 50% of the circle will be gaps.
+  final double gapFactor;
+
+  /// The thickness of the circle in logical pixels.
+  final double strokeWidth;
+
+  /// The TextStyle to use to display to display
+  /// remaining in the center of the widget.
+  ///
+  /// Warning : It will not displays if the `TextStyle.fontSize` is too large.
   final TextStyle textStyle;
 
   Paint get _totalPaint => Paint()

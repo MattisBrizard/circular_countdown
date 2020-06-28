@@ -3,12 +3,15 @@ import 'package:flutter/material.dart';
 import 'countdowns/static_countdown.dart';
 import 'countdowns/time_countdown.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
+  const MyApp({
+    Key key,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       title: 'Circular Countdown',
       home: MyHomePage(),
       debugShowCheckedModeBanner: false,
@@ -17,6 +20,10 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
+  const MyHomePage({
+    Key key,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +40,7 @@ class MyHomePage extends StatelessWidget {
             RaisedButton(
               onPressed: () => Navigator.of(context).push(
                 MaterialPageRoute<StaticCountdownPage>(
-                  builder: (context) => StaticCountdownPage(),
+                  builder: (context) => const StaticCountdownPage(),
                 ),
               ),
               child: const Text('Static CircularCountdown'),
@@ -41,7 +48,7 @@ class MyHomePage extends StatelessWidget {
             RaisedButton(
               onPressed: () => Navigator.of(context).push(
                 MaterialPageRoute<TimeCountdownPage>(
-                  builder: (context) => TimeCountdownPage(),
+                  builder: (context) => const TimeCountdownPage(),
                 ),
               ),
               child: const Text('Time CircularCountdown'),

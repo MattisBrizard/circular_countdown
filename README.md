@@ -9,7 +9,7 @@ In the `pubspec.yaml` of your flutter project, add the following dependency:
 ```yaml
 dependencies:
   ...
-  circular_countdown: ^1.0.1
+  circular_countdown: ^1.0.2
 ```
 
 In your library add the following import:
@@ -18,7 +18,7 @@ In your library add the following import:
 import  'package:circular_countdown/circular_countdown.dart';
 ```
 
-## Example
+## Static countdown
 
 This is the way to create a simple static countdown.
 
@@ -38,6 +38,8 @@ By playing with the parameters, you can change the size, the colors, the size of
 
 <img width="250"  src="https://raw.githubusercontent.com/MattisBrizard/circular_countdown/master/doc/images/complex.png">
 
+## Timer countdown
+
 If you want to use the `CircularCountdown` widget as a Time Countdown, you can use the built-in `TimeCircularCountdown` that wraps the timer logic for you: (see how in example)
 
 ```dart
@@ -48,6 +50,8 @@ TimeCircularCountdown(
     onFinished: () => print('Countdown finished'),
 );
 ```
+
+<img width="250"  src="https://raw.githubusercontent.com/MattisBrizard/circular_countdown/master/doc/gifs/timer.gif">
 
 ## Demo
 

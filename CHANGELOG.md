@@ -1,3 +1,9 @@
+# [1.0.2] - 28/06/2020
+
+## Changes :
+
+- Added timer gif in Readme.
+
 # [1.0.1] - 14/05/2020
 
 ## Changes :

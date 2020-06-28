@@ -3,6 +3,10 @@ import 'package:circular_countdown/circular_countdown.dart';
 import 'package:gap/gap.dart';
 
 class StaticCountdownPage extends StatelessWidget {
+  const StaticCountdownPage({
+    Key key,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
