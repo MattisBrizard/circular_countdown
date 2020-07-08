@@ -134,8 +134,7 @@ class CircularCountdown extends StatelessWidget {
               gapFactor: gapFactor ?? 6,
               strokeWidth: paintStrokeWidth,
               textStyle: textStyle,
-              isClockwise: false,
-              // isClockwise: isClockwise ?? true,
+              isClockwise: isClockwise ?? true,
             ),
             size: Size(
               finalDiameter,
