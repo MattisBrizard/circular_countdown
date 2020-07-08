@@ -1,3 +1,9 @@
+# [1.1.1] - 08/07/2020
+
+## Changes :
+
+- Fixed an issue where isClockwise wasn't correctly used.
+
 # [1.1.0] - 08/07/2020
 
 ## Changes :
