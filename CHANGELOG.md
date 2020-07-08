@@ -1,3 +1,9 @@
+# [1.1.0] - 08/07/2020
+
+## Changes :
+
+- Added a isClockwise property to draw the countdown clockwise or not.
+
 # [1.0.2] - 28/06/2020
 
 ## Changes :

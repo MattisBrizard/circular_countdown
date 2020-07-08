@@ -37,6 +37,7 @@ class CircularCountdown extends StatelessWidget {
     this.countdownCurrentColor,
     this.gapFactor,
     this.strokeWidth,
+    this.isClockwise,
     this.textStyle,
   })  : assert(diameter == null || diameter > 0.0),
         assert(countdownTotal != null && countdownTotal > 0.0),
@@ -86,10 +87,14 @@ class CircularCountdown extends StatelessWidget {
   /// Default to [diameter/6] for proportion purpose.
   final double strokeWidth;
 
-  /// The TextStyle to use to display to display
-  /// remaining in the center of the widget.
+  /// Whether the countdown is drawn clockwise or not.
+  /// Default to [true].
+  final bool isClockwise;
+
+  /// The `TextStyle` to use to display the `countdownRemaining` value
+  /// in the center of the widget.
   ///
-  /// Warning : It will not displays if the `fontSize` is too large.
+  /// Warning : It will not displays if the `TextStyle.fontSize` is too large.
   final TextStyle textStyle;
 
   static const double _fallbackDiameter = 100;
@@ -129,6 +134,8 @@ class CircularCountdown extends StatelessWidget {
               gapFactor: gapFactor ?? 6,
               strokeWidth: paintStrokeWidth,
               textStyle: textStyle,
+              isClockwise: false,
+              // isClockwise: isClockwise ?? true,
             ),
             size: Size(
               finalDiameter,

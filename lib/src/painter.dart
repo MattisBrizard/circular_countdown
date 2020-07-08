@@ -14,6 +14,7 @@ class CircularCountdownPainter extends CustomPainter {
     @required this.countdownRemainingColor,
     @required this.strokeWidth,
     @required this.gapFactor,
+    @required this.isClockwise,
     this.countdownCurrentColor,
     this.textStyle,
   });
@@ -41,8 +42,11 @@ class CircularCountdownPainter extends CustomPainter {
   /// The thickness of the circle in logical pixels.
   final double strokeWidth;
 
-  /// The TextStyle to use to display to display
-  /// remaining in the center of the widget.
+  /// Whether the countdown is drawn clockwise or not.
+  final bool isClockwise;
+
+  /// The `TextStyle` to use to display the `countdownRemaining` value
+  /// in the center of the widget.
   ///
   /// Warning : It will not displays if the `TextStyle.fontSize` is too large.
   final TextStyle textStyle;
@@ -79,32 +83,55 @@ class CircularCountdownPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
+    final offset = Offset(size.width / 2, size.height / 2);
+    final radius = _getRadius(size.width);
+    final arcSize = _fullArcSize;
+
     ui.Paint paint;
     for (int unit = 0; unit < countdownTotal; unit++) {
       // Set painter.
-      if (_currentPaint != null) {
-        if (countdownTotal - unit < countdownRemaining) {
-          paint = _remainingPaint;
-        } else if (countdownTotal - unit == countdownRemaining) {
-          paint = _currentPaint;
+
+      if (isClockwise) {
+        if (_currentPaint != null) {
+          if (countdownTotal - unit < countdownRemaining) {
+            paint = _remainingPaint;
+          } else if (countdownTotal - unit == countdownRemaining) {
+            paint = _currentPaint;
+          } else {
+            paint = _totalPaint;
+          }
         } else {
-          paint = _totalPaint;
+          if (countdownTotal - unit <= countdownRemaining) {
+            paint = _remainingPaint;
+          } else {
+            paint = _totalPaint;
+          }
         }
       } else {
-        if (countdownTotal - unit <= countdownRemaining) {
-          paint = _remainingPaint;
+        if (_currentPaint != null) {
+          if (unit + 1 < countdownRemaining) {
+            paint = _remainingPaint;
+          } else if (unit + 1 == countdownRemaining) {
+            paint = _currentPaint;
+          } else {
+            paint = _totalPaint;
+          }
         } else {
-          paint = _totalPaint;
+          if (unit < countdownRemaining) {
+            paint = _remainingPaint;
+          } else {
+            paint = _totalPaint;
+          }
         }
       }
 
       canvas.drawArc(
         Rect.fromCircle(
-          center: Offset(size.width / 2, size.height / 2),
-          radius: _getRadius(size.width),
+          center: offset,
+          radius: radius,
         ),
         _startAngle(unit),
-        _fullArcSize,
+        arcSize,
         false,
         paint,
       );

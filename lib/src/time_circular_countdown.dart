@@ -29,6 +29,7 @@ class TimeCircularCountdown extends StatefulWidget {
     this.gapFactor,
     this.strokeWidth,
     this.textStyle,
+    this.isClockwise,
     Key key,
   })  : assert(countdownTotal != null && countdownTotal >= 0),
         assert(gapFactor == null || gapFactor > 0.0),
@@ -89,10 +90,14 @@ class TimeCircularCountdown extends StatefulWidget {
   /// Default to [diameter/6] for proportion purpose.
   final double strokeWidth;
 
-  /// The TextStyle to use to display to display
-  /// remaining in the center of the widget.
+  /// Whether the countdown is drawn clockwise or not.
+  /// Default to [true].
+  final bool isClockwise;
+
+  /// The `TextStyle` to use to display the `countdownRemaining` value
+  /// in the center of the widget.
   ///
-  /// Warning : It will not displays if the `fontSize` is too large.
+  /// Warning : It will not displays if the `TextStyle.fontSize` is too large.
   final TextStyle textStyle;
 
   @override
@@ -195,6 +200,7 @@ class _TimeCircularCountdownState extends State<TimeCircularCountdown> {
       gapFactor: widget.gapFactor,
       strokeWidth: widget.strokeWidth,
       textStyle: widget.textStyle,
+      isClockwise: widget.isClockwise,
     );
   }
 }
