@@ -30,6 +30,7 @@ class TimeCircularCountdown extends StatefulWidget {
     this.strokeWidth,
     this.textStyle,
     this.isClockwise,
+    this.repeat,
     Key key,
   })  : assert(countdownTotal != null && countdownTotal >= 0),
         assert(gapFactor == null || gapFactor > 0.0),
@@ -91,8 +92,14 @@ class TimeCircularCountdown extends StatefulWidget {
   final double strokeWidth;
 
   /// Whether the countdown is drawn clockwise or not.
+  ///
   /// Default to [true].
   final bool isClockwise;
+
+  /// Whether the countdown should restart when finished or not.
+  ///
+  /// Default to [false].
+  final bool repeat;
 
   /// The `TextStyle` to use to display the `countdownRemaining` value
   /// in the center of the widget.
@@ -174,6 +181,12 @@ class _TimeCircularCountdownState extends State<TimeCircularCountdown> {
         timer?.cancel();
         if (widget.onFinished != null) {
           widget.onFinished();
+        }
+        if (widget.repeat != null && widget.repeat) {
+          unit = widget.unit;
+          total = widget.countdownTotal;
+          timeToEnd = widget.countdownTotal;
+          _updateUnit();
         }
     }
     if (widget.onUpdated != null && unit != null) {

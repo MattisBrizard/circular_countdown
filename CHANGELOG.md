@@ -1,3 +1,17 @@
+# [1.2.0] - 15/07/2020
+
+## Changes :
+
+- Added a `repeat` bool property to `TimeCircularCountdown` to restart countdown when ended (Default to `false`).
+
+```dart
+TimeCircularCountdown(
+    unit: CountdownUnit.seconds,
+    countdownTotal: 5,
+    repeat: true,
+);
+```
+
 # [1.1.1] - 08/07/2020
 
 ## Changes :
@@ -24,9 +38,16 @@
 
 # [1.0.0] - 10/05/2020
 
-## Added :
+## Changes :
 
-Added a `TimeCircularCountdown` which provides an easy way to setup a time countdown with the `CircularCountdown`.
+- Added a `TimeCircularCountdown` which provides an easy way to setup a time countdown with the `CircularCountdown`.
+
+- Updated `CircularCountdown` constructor :
+
+  - `diameter` is no longer required. (If not provided then should take either the maximum space if possible or 100)
+  - `countdownRemaining` is no longer required.
+
+- Updated README.md
 
 ```dart
 TimeCircularCountdown(
@@ -44,24 +65,16 @@ TimeCircularCountdown(
 
 ## Breaking changes :
 
-Updated `CircularCountdown` constructor :
-
-- `textSpan` has been replaced by `textSyle` that will be used to display the current value of the countdown.
-
-## Changes :
-
 - Updated `CircularCountdown` constructor :
 
-  - `diameter` is no longer required. (If not provided then should take either the maximum space if possible or 100)
-  - `countdownRemaining` is no longer required.
-
-- Updated README.md
+  - `textSpan` has been replaced by `textSyle` that will be used to display the current value of the countdown.
 
 # [0.1.0] - 15/08/2019
 
-Added possibility to display a textSpan in the center of the widget.
+## Changes :
 
-This textSpan will displays only if there is enough space.
+- Added possibility to display a textSpan in the center of the widget.
+  This textSpan will displays only if there is enough space.
 
 ```dart
 CircularCountdown(
@@ -81,8 +94,8 @@ CircularCountdown(
 
 # [0.0.2] - 02/08/2019
 
-Updated doc
+Updated doc.
 
-## [0.0.1] - 02/08/2019
+# [0.0.1] - 02/08/2019
 
-Initial release
+Initial release.

@@ -1,6 +1,6 @@
 # circular_countdown
 
-A package that represents a circular countdown that you can use for every kind of units (days, hours, seconds, points, ...) that could be decremented.
+A package that represents a circular countdown that you can use for every kind of units (days, hours, seconds, points, ...).
 
 ## Getting Started
 
@@ -9,7 +9,7 @@ In the `pubspec.yaml` of your flutter project, add the following dependency:
 ```yaml
 dependencies:
   ...
-  circular_countdown: ^1.1.1
+  circular_countdown: ^1.2.0
 ```
 
 In your library add the following import:
@@ -52,6 +52,8 @@ TimeCircularCountdown(
 ```
 
 <img width="250"  src="https://raw.githubusercontent.com/MattisBrizard/circular_countdown/master/doc/gifs/timer.gif">
+
+You can repeat the timer when ended by using the `repeat` bool property.
 
 ## Demo
 
