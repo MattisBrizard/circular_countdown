@@ -1,3 +1,9 @@
+# [1.2.1] - 16/07/2020
+
+## Changes :
+
+- Fixed `TimeCircularCountdown` to care about widget configuration changes for `unit` and `countdownTotal` properties. (https://github.com/MattisBrizard/circular_countdown/issues/3)
+
 # [1.2.0] - 15/07/2020
 
 ## Changes :

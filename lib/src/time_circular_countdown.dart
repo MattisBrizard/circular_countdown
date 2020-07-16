@@ -32,7 +32,8 @@ class TimeCircularCountdown extends StatefulWidget {
     this.isClockwise,
     this.repeat,
     Key key,
-  })  : assert(countdownTotal != null && countdownTotal >= 0),
+  })  : assert(countdownTotal != null && countdownTotal > 0),
+        assert(unit != null),
         assert(gapFactor == null || gapFactor > 0.0),
         super(key: key);
 
@@ -136,6 +137,19 @@ class _TimeCircularCountdownState extends State<TimeCircularCountdown> {
       widget.onCanceled(unit, timeToEnd);
     }
     super.dispose();
+  }
+
+  @override
+  void didUpdateWidget(TimeCircularCountdown old) {
+    if (widget.countdownTotal != old.countdownTotal ||
+        widget.unit != old.unit) {
+      timer?.cancel();
+      unit = widget.unit;
+      total = widget.countdownTotal;
+      timeToEnd = widget.countdownTotal;
+      _updateUnit();
+    }
+    super.didUpdateWidget(old);
   }
 
   void _updateUnit() {
