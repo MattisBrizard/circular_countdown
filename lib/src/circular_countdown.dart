@@ -1,8 +1,7 @@
 import 'dart:math';
 
+import 'package:circular_countdown/src/painter.dart';
 import 'package:flutter/material.dart';
-
-import 'painter.dart';
 
 /// A circular countdown.
 ///

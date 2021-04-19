@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 
 import 'countdowns/static_countdown.dart';
 import 'countdowns/time_countdown.dart';
@@ -9,6 +10,7 @@ class MyApp extends StatelessWidget {
   const MyApp({
     Key key,
   }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
@@ -37,7 +39,7 @@ class MyHomePage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            RaisedButton(
+            ElevatedButton(
               onPressed: () => Navigator.of(context).push(
                 MaterialPageRoute<StaticCountdownPage>(
                   builder: (context) => const StaticCountdownPage(),
@@ -45,7 +47,8 @@ class MyHomePage extends StatelessWidget {
               ),
               child: const Text('Static CircularCountdown'),
             ),
-            RaisedButton(
+            const Gap(30),
+            ElevatedButton(
               onPressed: () => Navigator.of(context).push(
                 MaterialPageRoute<TimeCountdownPage>(
                   builder: (context) => const TimeCountdownPage(),

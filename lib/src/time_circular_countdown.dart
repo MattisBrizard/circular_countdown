@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 
 import 'circular_countdown.dart';
 
+/// Signature for a function which takes the `unit` and the `remaining` countdown.
 typedef CountdownCallback = void Function(
   CountdownUnit unit,
   int remaining,
