@@ -8,13 +8,13 @@ import 'package:flutter/widgets.dart';
 class CircularCountdownPainter extends CustomPainter {
   /// Creates a [CircularCountdownPainter].
   const CircularCountdownPainter({
-    @required this.countdownTotal,
-    @required this.countdownRemaining,
-    @required this.countdownTotalColor,
-    @required this.countdownRemainingColor,
-    @required this.strokeWidth,
-    @required this.gapFactor,
-    @required this.isClockwise,
+    required this.countdownTotal,
+    required this.countdownRemaining,
+    required this.countdownTotalColor,
+    required this.countdownRemainingColor,
+    required this.strokeWidth,
+    required this.gapFactor,
+    required this.isClockwise,
     this.countdownCurrentColor,
     this.textStyle,
   });
@@ -32,7 +32,7 @@ class CircularCountdownPainter extends CustomPainter {
   final Color countdownRemainingColor;
 
   /// The color to use when painting the current unit.
-  final Color countdownCurrentColor;
+  final Color? countdownCurrentColor;
 
   /// The part of the circle that will be gap. (`1/gapFactor`)
   ///
@@ -49,7 +49,7 @@ class CircularCountdownPainter extends CustomPainter {
   /// in the center of the widget.
   ///
   /// Warning : It will not displays if the `TextStyle.fontSize` is too large.
-  final TextStyle textStyle;
+  final TextStyle? textStyle;
 
   Paint get _totalPaint => Paint()
     ..style = PaintingStyle.stroke
@@ -61,12 +61,12 @@ class CircularCountdownPainter extends CustomPainter {
     ..strokeWidth = strokeWidth
     ..color = countdownRemainingColor;
 
-  Paint get _currentPaint {
+  Paint? get _currentPaint {
     if (countdownCurrentColor != null) {
       return Paint()
         ..style = PaintingStyle.stroke
         ..strokeWidth = strokeWidth
-        ..color = countdownCurrentColor;
+        ..color = countdownCurrentColor!;
     } else {
       return null;
     }
@@ -87,7 +87,7 @@ class CircularCountdownPainter extends CustomPainter {
     final radius = _getRadius(size.width);
     final arcSize = _fullArcSize;
 
-    ui.Paint paint;
+    ui.Paint? paint;
     for (int unit = 0; unit < countdownTotal; unit++) {
       // Set painter.
 
@@ -133,7 +133,7 @@ class CircularCountdownPainter extends CustomPainter {
         _startAngle(unit),
         arcSize,
         false,
-        paint,
+        paint!,
       );
     }
 

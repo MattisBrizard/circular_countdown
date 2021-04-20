@@ -1,3 +1,9 @@
+# [2.0.0] - 20/04/2021
+
+## Changes :
+
+- Added null-safety support. (https://github.com/MattisBrizard/circular_countdown/issues/5)
+
 # [1.2.1] - 16/07/2020
 
 ## Changes :

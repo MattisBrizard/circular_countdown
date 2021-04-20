@@ -17,25 +17,24 @@ typedef CountdownCallback = void Function(
 class TimeCircularCountdown extends StatefulWidget {
   /// Creates a [TimeCircularCountdown].
   const TimeCircularCountdown({
-    @required this.unit,
+    required this.unit,
     this.countdownTotal = 1,
     this.shouldDowngradeUnit = true,
     this.onUpdated,
     this.onFinished,
     this.onCanceled,
     this.diameter,
-    this.countdownTotalColor,
-    this.countdownRemainingColor,
+    this.countdownTotalColor = Colors.white30,
+    this.countdownRemainingColor = Colors.white,
     this.countdownCurrentColor,
-    this.gapFactor,
+    this.gapFactor = 6,
     this.strokeWidth,
     this.textStyle,
-    this.isClockwise,
+    this.isClockwise = true,
     this.repeat,
-    Key key,
-  })  : assert(countdownTotal != null && countdownTotal > 0),
-        assert(unit != null),
-        assert(gapFactor == null || gapFactor > 0.0),
+    Key? key,
+  })  : assert(countdownTotal > 0),
+        assert(gapFactor > 0.0),
         super(key: key);
 
   /// The time unit.
@@ -53,18 +52,18 @@ class TimeCircularCountdown extends StatefulWidget {
   final bool shouldDowngradeUnit;
 
   /// Callback to call when countdown has updated.
-  final CountdownCallback onUpdated;
+  final CountdownCallback? onUpdated;
 
   /// Callback to call when countdown has finished.
-  final VoidCallback onFinished;
+  final VoidCallback? onFinished;
 
   /// Callback to call when countdown has canceled before the end.
-  final CountdownCallback onCanceled;
+  final CountdownCallback? onCanceled;
 
   /// The outer diameter of the circular countdown widget.
   ///
   /// Default to max available if possible, else `100`.
-  final double diameter;
+  final double? diameter;
 
   /// The color to use when painting passed units.
   ///
@@ -77,7 +76,7 @@ class TimeCircularCountdown extends StatefulWidget {
   final Color countdownRemainingColor;
 
   /// The color to use when painting the current unit.
-  final Color countdownCurrentColor;
+  final Color? countdownCurrentColor;
 
   /// The part of the circle that will be gap. (`1/gapFactor`)
   ///
@@ -91,7 +90,7 @@ class TimeCircularCountdown extends StatefulWidget {
   /// Must be positive and less than [diameter/2].
   ///
   /// Default to [diameter/6] for proportion purpose.
-  final double strokeWidth;
+  final double? strokeWidth;
 
   /// Whether the countdown is drawn clockwise or not.
   ///
@@ -101,23 +100,23 @@ class TimeCircularCountdown extends StatefulWidget {
   /// Whether the countdown should restart when finished or not.
   ///
   /// Default to [false].
-  final bool repeat;
+  final bool? repeat;
 
   /// The `TextStyle` to use to display the `countdownRemaining` value
   /// in the center of the widget.
   ///
   /// Warning : It will not displays if the `TextStyle.fontSize` is too large.
-  final TextStyle textStyle;
+  final TextStyle? textStyle;
 
   @override
   _TimeCircularCountdownState createState() => _TimeCircularCountdownState();
 }
 
 class _TimeCircularCountdownState extends State<TimeCircularCountdown> {
-  Timer timer;
-  CountdownUnit unit;
-  int timeToEnd;
-  int total;
+  Timer? timer;
+  CountdownUnit? unit;
+  late int timeToEnd;
+  late int total;
 
   static const _oneHourInMinutes = 60;
   static const _oneMinuteInSeconds = 60;
@@ -135,7 +134,7 @@ class _TimeCircularCountdownState extends State<TimeCircularCountdown> {
   void dispose() {
     timer?.cancel();
     if (widget.onCanceled != null && unit != null) {
-      widget.onCanceled(unit, timeToEnd);
+      widget.onCanceled!(unit!, timeToEnd);
     }
     super.dispose();
   }
@@ -195,9 +194,9 @@ class _TimeCircularCountdownState extends State<TimeCircularCountdown> {
       default:
         timer?.cancel();
         if (widget.onFinished != null) {
-          widget.onFinished();
+          widget.onFinished!();
         }
-        if (widget.repeat != null && widget.repeat) {
+        if (widget.repeat != null && widget.repeat!) {
           unit = widget.unit;
           total = widget.countdownTotal;
           timeToEnd = widget.countdownTotal;
@@ -205,7 +204,7 @@ class _TimeCircularCountdownState extends State<TimeCircularCountdown> {
         }
     }
     if (widget.onUpdated != null && unit != null) {
-      Future.microtask(() => widget.onUpdated(unit, timeToEnd));
+      Future.microtask(() => widget.onUpdated!(unit!, timeToEnd));
     }
   }
 

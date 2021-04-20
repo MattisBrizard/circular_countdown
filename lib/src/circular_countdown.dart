@@ -27,29 +27,29 @@ class CircularCountdown extends StatelessWidget {
   /// ```
   /// {@end-tool}
   const CircularCountdown({
-    Key key,
-    @required this.countdownTotal,
+    Key? key,
+    required this.countdownTotal,
     this.countdownRemaining,
     this.diameter,
-    this.countdownTotalColor,
-    this.countdownRemainingColor,
+    this.countdownTotalColor = Colors.white30,
+    this.countdownRemainingColor = Colors.white,
     this.countdownCurrentColor,
-    this.gapFactor,
+    this.gapFactor = 6,
     this.strokeWidth,
-    this.isClockwise,
+    this.isClockwise = true,
     this.textStyle,
   })  : assert(diameter == null || diameter > 0.0),
-        assert(countdownTotal != null && countdownTotal > 0.0),
+        assert(countdownTotal > 0.0),
         assert(countdownRemaining == null ||
             (countdownRemaining >= 0.0 &&
                 countdownRemaining <= countdownTotal)),
-        assert(gapFactor == null || gapFactor > 0.0),
+        assert(gapFactor > 0.0),
         super(key: key);
 
   /// The outer diameter of the circular countdown widget.
   ///
   /// Default to max available if possible, else `100`.
-  final double diameter;
+  final double? diameter;
 
   /// The total amount of units.
   final int countdownTotal;
@@ -57,7 +57,7 @@ class CircularCountdown extends StatelessWidget {
   /// The amount of remaining units.
   ///
   /// Default to `countdownTotal`.
-  final int countdownRemaining;
+  final int? countdownRemaining;
 
   /// The color to use when painting passed units.
   ///
@@ -70,11 +70,11 @@ class CircularCountdown extends StatelessWidget {
   final Color countdownRemainingColor;
 
   /// The color to use when painting the current unit.
-  final Color countdownCurrentColor;
+  final Color? countdownCurrentColor;
 
   /// The part of the circle that will be gap. (`1/gapFactor`)
   ///
-  /// Example : `gapFactor: 2` means that 50% of the circle will be gaps.
+  /// Example : `gapFactor: 2` means that 1/2 (50%) of the circle will be gaps.
   ///
   /// Defaults to [6].
   final double gapFactor;
@@ -84,7 +84,7 @@ class CircularCountdown extends StatelessWidget {
   /// Must be positive and less than [diameter/2].
   ///
   /// Default to [diameter/6] for proportion purpose.
-  final double strokeWidth;
+  final double? strokeWidth;
 
   /// Whether the countdown is drawn clockwise or not.
   /// Default to [true].
@@ -94,7 +94,7 @@ class CircularCountdown extends StatelessWidget {
   /// in the center of the widget.
   ///
   /// Warning : It will not displays if the `TextStyle.fontSize` is too large.
-  final TextStyle textStyle;
+  final TextStyle? textStyle;
 
   static const double _fallbackDiameter = 100;
 
@@ -102,7 +102,7 @@ class CircularCountdown extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        double computedDiameter;
+        double? computedDiameter;
         if (diameter == null) {
           final double height = constraints.maxHeight != double.infinity
               ? constraints.maxHeight
@@ -115,11 +115,11 @@ class CircularCountdown extends StatelessWidget {
           computedDiameter = min(height, width);
         }
 
-        final finalDiameter = diameter ?? computedDiameter;
+        final finalDiameter = diameter ?? computedDiameter!;
         final double paintStrokeWidth = (strokeWidth != null &&
-                strokeWidth > 0 &&
-                strokeWidth <= finalDiameter / 2)
-            ? strokeWidth
+                strokeWidth! > 0 &&
+                strokeWidth! <= finalDiameter / 2)
+            ? strokeWidth!
             : finalDiameter / 6;
 
         return Center(
@@ -127,13 +127,13 @@ class CircularCountdown extends StatelessWidget {
             painter: CircularCountdownPainter(
               countdownTotal: countdownTotal,
               countdownRemaining: countdownRemaining ?? countdownTotal,
-              countdownTotalColor: countdownTotalColor ?? Colors.white30,
-              countdownRemainingColor: countdownRemainingColor ?? Colors.white,
+              countdownTotalColor: countdownTotalColor,
+              countdownRemainingColor: countdownRemainingColor,
               countdownCurrentColor: countdownCurrentColor,
-              gapFactor: gapFactor ?? 6,
+              gapFactor: gapFactor,
               strokeWidth: paintStrokeWidth,
               textStyle: textStyle,
-              isClockwise: isClockwise ?? true,
+              isClockwise: isClockwise,
             ),
             size: Size(
               finalDiameter,

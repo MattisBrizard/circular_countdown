@@ -8,7 +8,7 @@ void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
 
 class MyHomePage extends StatelessWidget {
   const MyHomePage({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override

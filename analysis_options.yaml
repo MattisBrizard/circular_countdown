@@ -15,7 +15,7 @@ analyzer:
     - 'submodules/**'
     - 'lib/**/*.graphql.dart'
     - 'lib/**/*.g.dart'
-    - '**/example/**'
+    - 'example/**'
 linter:
   rules:
     # We prefer having parameters in the same order as fields https://github.com/flutter/flutter/issues/10219

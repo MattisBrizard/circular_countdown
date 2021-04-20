@@ -4,7 +4,7 @@ import 'package:gap/gap.dart';
 
 class StaticCountdownPage extends StatelessWidget {
   const StaticCountdownPage({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override

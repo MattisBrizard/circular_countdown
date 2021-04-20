@@ -11,12 +11,13 @@ void main() {
     expect(countdown.countdownTotal, 10);
     expect(countdown.countdownRemaining, null);
     expect(countdown.diameter, null);
-    expect(countdown.countdownTotalColor, null);
-    expect(countdown.countdownRemainingColor, null);
+    expect(countdown.countdownTotalColor, Colors.white30);
+    expect(countdown.countdownRemainingColor, Colors.white);
     expect(countdown.countdownCurrentColor, null);
-    expect(countdown.gapFactor, null);
+    expect(countdown.gapFactor, 6);
     expect(countdown.strokeWidth, null);
     expect(countdown.textStyle, null);
+    expect(countdown.isClockwise, true);
 
     const TextStyle style = TextStyle();
     const CircularCountdown countdown2 = CircularCountdown(
@@ -73,11 +74,11 @@ void main() {
     final painter = painterFinder.evaluate().first;
 
     expect(
-      painter.size.width,
+      painter.size!.width,
       400,
     );
     expect(
-      painter.size.height,
+      painter.size!.height,
       400,
     );
   });
@@ -107,11 +108,11 @@ void main() {
     final painter = painterFinder.evaluate().first;
 
     expect(
-      painter.size.width,
+      painter.size!.width,
       200,
     );
     expect(
-      painter.size.height,
+      painter.size!.height,
       200,
     );
   });
