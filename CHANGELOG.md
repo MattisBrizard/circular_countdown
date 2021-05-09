@@ -1,3 +1,10 @@
+# [2.1.0] - 05/05/2021
+
+## Changes :
+
+- `CircularCountdown` is no more wrapped with `Center`.
+- Updated README and added an example with [timer_controller](https://pub.dev/packages/timer_controller).
+
 # [2.0.0] - 20/04/2021
 
 ## Changes :

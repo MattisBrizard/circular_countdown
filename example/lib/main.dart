@@ -1,3 +1,4 @@
+import 'package:example/countdowns/controlled_countdown.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
@@ -55,6 +56,15 @@ class MyHomePage extends StatelessWidget {
                 ),
               ),
               child: const Text('Time CircularCountdown'),
+            ),
+            const Gap(30),
+            ElevatedButton(
+              onPressed: () => Navigator.of(context).push(
+                MaterialPageRoute<ControlledCountdownPage>(
+                  builder: (context) => const ControlledCountdownPage(),
+                ),
+              ),
+              child: const Text('Controlled CircularCountdown'),
             ),
           ],
         ),

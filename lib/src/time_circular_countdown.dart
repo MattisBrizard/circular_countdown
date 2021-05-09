@@ -14,6 +14,9 @@ typedef CountdownCallback = void Function(
 /// Time unit `CircularCountdown`.
 ///
 /// Refreshes itself every `unit` tick.
+///
+/// Note: If you want full control on the timer (play, pause, etc), you can use the `timer_controller` library with the [CircularCountdown].
+/// You can find how to integrate it in the example app.
 class TimeCircularCountdown extends StatefulWidget {
   /// Creates a [TimeCircularCountdown].
   const TimeCircularCountdown({

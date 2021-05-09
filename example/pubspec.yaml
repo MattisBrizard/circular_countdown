@@ -8,11 +8,12 @@ environment:
 publish_to: none
 
 dependencies:
-  flutter:
-    sdk: flutter
   circular_countdown:
     path: ../
+  flutter:
+    sdk: flutter
   gap: ^2.0.0
+  timer_controller: ^0.1.0
 
 dev_dependencies:
   flutter_test:

@@ -2,6 +2,12 @@
 
 A package that represents a circular countdown that you can use for every kind of units (days, hours, seconds, points, ...).
 
+## Demo
+
+A web demo is available here : https://mattisbrizard.github.io/circular_countdown/#/
+
+[![Build Status](https://img.shields.io/github/workflow/status/MattisBrizard/circular_countdown/Deploy%20Flutter%20web)](https://github.com/MattisBrizard/circular_countdown/actions?query=workflow%3A%22Deploy+Flutter+web%22)
+
 ## Getting Started
 
 In the `pubspec.yaml` of your flutter project, add the following dependency:
@@ -9,7 +15,7 @@ In the `pubspec.yaml` of your flutter project, add the following dependency:
 ```yaml
 dependencies:
   ...
-  circular_countdown: ^1.2.1
+  circular_countdown: ^2.1.0
 ```
 
 In your library add the following import:
@@ -25,10 +31,10 @@ This is the way to create a simple static countdown.
 ```dart
 import 'package:flutter/material.dart';
 ...
-CircularCountdown(
+return CircularCountdown(
 	countdownTotal:  10,
 	countdownRemaining:  7,
-)
+);
 ...
 ```
 
@@ -40,10 +46,12 @@ By playing with the parameters, you can change the size, the colors, the size of
 
 ## Timer countdown
 
+If you want to have full control on the timer (start, pause, etc), please see the section _Controlled countdown_ below.
+
 If you want to use the `CircularCountdown` widget as a Time Countdown, you can use the built-in `TimeCircularCountdown` that wraps the timer logic for you: (see how in example)
 
 ```dart
-TimeCircularCountdown(
+return TimeCircularCountdown(
     unit: CountdownUnit.seconds,
     countdownTotal: 30,
     onUpdated: (unit, remainingTime) => print('Updated'),
@@ -55,11 +63,11 @@ TimeCircularCountdown(
 
 You can repeat the timer when ended by using the `repeat` bool property.
 
-## Demo
+## Controlled countdown
 
-A web demo is available here : https://mattisbrizard.github.io/circular_countdown/#/
+To have full control on the timer (play, pause, reset, shared between mutliple screen, etc), you can use `CircularCountdown` with the [timer_controller](https://pub.dev/packages/timer_controller) library.
 
-[![Build Status](https://img.shields.io/github/workflow/status/MattisBrizard/circular_countdown/Deploy%20Flutter%20web)](https://github.com/MattisBrizard/circular_countdown/actions?query=workflow%3A%22Deploy+Flutter+web%22)
+You can see the code in the [example](https://github.com/MattisBrizard/circular_countdown/tree/master/example/lib/countdowns/controlled_countdown.dart) app.
 
 ## Contribution
 

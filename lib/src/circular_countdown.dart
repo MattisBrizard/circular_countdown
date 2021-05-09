@@ -122,23 +122,21 @@ class CircularCountdown extends StatelessWidget {
             ? strokeWidth!
             : finalDiameter / 6;
 
-        return Center(
-          child: CustomPaint(
-            painter: CircularCountdownPainter(
-              countdownTotal: countdownTotal,
-              countdownRemaining: countdownRemaining ?? countdownTotal,
-              countdownTotalColor: countdownTotalColor,
-              countdownRemainingColor: countdownRemainingColor,
-              countdownCurrentColor: countdownCurrentColor,
-              gapFactor: gapFactor,
-              strokeWidth: paintStrokeWidth,
-              textStyle: textStyle,
-              isClockwise: isClockwise,
-            ),
-            size: Size(
-              finalDiameter,
-              finalDiameter,
-            ),
+        return CustomPaint(
+          painter: CircularCountdownPainter(
+            countdownTotal: countdownTotal,
+            countdownRemaining: countdownRemaining ?? countdownTotal,
+            countdownTotalColor: countdownTotalColor,
+            countdownRemainingColor: countdownRemainingColor,
+            countdownCurrentColor: countdownCurrentColor,
+            gapFactor: gapFactor,
+            strokeWidth: paintStrokeWidth,
+            textStyle: textStyle,
+            isClockwise: isClockwise,
+          ),
+          size: Size(
+            finalDiameter,
+            finalDiameter,
           ),
         );
       },
